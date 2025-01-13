@@ -1,0 +1,2 @@
+# MagicAI
+ new AI project
