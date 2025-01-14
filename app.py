@@ -4,15 +4,15 @@
 
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Initialize Flask app
 app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
 
 # Initialize tokenizer and model
-tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium")
-model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium")
+tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
+model = AutoModelForSeq2SeqLM.from_pretrained("microsoft/codebert-base")
 
 @app.route('/')
 def home():
@@ -26,9 +26,9 @@ def generate():
         data = request.json
         prompt = data.get("prompt", "")
 
-        # Encode the input and generate a response using DialoGPT
-        inputs = tokenizer.encode(prompt + tokenizer.eos_token, return_tensors='pt')
-        outputs = model.generate(inputs, max_length=200, pad_token_id=tokenizer.eos_token_id)
+        # Encode the input and generate a response using CodeBERT
+        inputs = tokenizer.encode(prompt, return_tensors='pt')
+        outputs = model.generate(inputs, max_length=200)
 
         # Decode the generated response
         response_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
