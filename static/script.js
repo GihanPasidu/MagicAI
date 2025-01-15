@@ -3,43 +3,53 @@ async function askMagicAI() {
     const chatMessages = document.getElementById("chatMessages");
     const askButton = document.getElementById("askButton");
 
-    if (!prompt.trim()) return;
+    if (!prompt.trim()) {
+        alert("Please enter a question");
+        return;
+    }
 
-    // Display user message
-    const userMessage = document.createElement("div");
-    userMessage.className = "message user";
-    userMessage.textContent = prompt;
-    chatMessages.appendChild(userMessage);
+    // Add user message
+    addMessage(prompt, 'user');
 
-    // Clear input
-    document.getElementById("prompt").value = "";
-
-    // Display loading message
-    const loadingMessage = document.createElement("div");
-    loadingMessage.className = "message bot";
-    loadingMessage.textContent = "Loading...";
-    chatMessages.appendChild(loadingMessage);
-
+    // Disable button and show loading
     askButton.disabled = true;
+    const loadingMessage = addMessage('Thinking...', 'bot loading');
 
     try {
         const response = await fetch('/generate', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ prompt })
         });
 
         const data = await response.json();
-        loadingMessage.textContent = data.response_text || data.error;
+
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        // Replace loading message with response
+        loadingMessage.textContent = data.response;
+        loadingMessage.classList.remove('loading');
     } catch (error) {
-        loadingMessage.textContent = "Error: " + error.message;
+        loadingMessage.textContent = `Error: ${error.message}`;
+        loadingMessage.classList.add('error');
     } finally {
         askButton.disabled = false;
+        document.getElementById("prompt").value = "";
+        scrollToBottom();
     }
+}
 
-    // Scroll to the bottom of the chat
+function addMessage(text, type) {
+    const message = document.createElement("div");
+    message.className = `message ${type}`;
+    message.textContent = text;
+    chatMessages.appendChild(message);
+    return message;
+}
+
+function scrollToBottom() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
@@ -54,5 +64,13 @@ async function fetchModelInfo() {
         console.error("Error fetching model info:", error);
     }
 }
+
+// Event listeners
+document.getElementById("prompt").addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        askMagicAI();
+    }
+});
 
 document.addEventListener("DOMContentLoaded", fetchModelInfo);

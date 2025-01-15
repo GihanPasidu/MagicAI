@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MagicAI - Coding Assistant</title>
+    <title>MagicAI - Code Assistant</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="/static/style.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="chat-container mx-auto p-4">
-        <div class="chat-header text-3xl font-bold mb-4">MagicAI - Your Coding Assistant</div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>MagicAI Code Assistant</h1>
+            <p class="subtitle">Ask me anything about coding!</p>
+        </div>
         <div class="chat-messages" id="chatMessages"></div>
-        <div class="chat-input mt-4">
-            <textarea id="prompt" placeholder="Type your coding question here..." rows="3" class="w-full p-2 border border-gray-300 rounded mb-2"></textarea>
-            <button id="askButton" onclick="askMagicAI()" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+        <div class="chat-input-container">
+            <textarea 
+                id="prompt" 
+                placeholder="Type your coding question here... (Press Enter to send)"
+                rows="3"></textarea>
+            <button id="askButton" onclick="askMagicAI()">
+                <span>Send</span>
+            </button>
         </div>
     </div>
-    <script src="/static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
