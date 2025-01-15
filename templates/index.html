@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MagicAI - Coding Assistant</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>MagicAI - Your Coding Assistant</h1>
-        <textarea id="prompt" placeholder="Type your coding question here..." rows="5" cols="50"></textarea><br>
-        <button id="askButton" onclick="askMagicAI()">Ask MagicAI</button>
-        <p><strong>Response:</strong></p>
-        <p id="response"></p>
+<body class="bg-gray-100">
+    <div class="chat-container mx-auto p-4">
+        <div class="chat-header text-3xl font-bold mb-4">MagicAI - Your Coding Assistant</div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input mt-4">
+            <textarea id="prompt" placeholder="Type your coding question here..." rows="3" class="w-full p-2 border border-gray-300 rounded mb-2"></textarea>
+            <button id="askButton" onclick="askMagicAI()" class="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+        </div>
     </div>
     <script src="/static/script.js"></script>
 </body>
