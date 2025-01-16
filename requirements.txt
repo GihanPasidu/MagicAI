@@ -4,3 +4,5 @@ transformers==4.30.2
 torch==2.0.1
 numpy==1.24.3
 sentencepiece>=0.1.96
+nltk==3.6.7
+openai==0.27.0
