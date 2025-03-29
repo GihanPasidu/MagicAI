@@ -3,24 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MagicAI - Code Assistant</title>
+    <title>MagicAI - Trading Analysis Assistant</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100">
     <div class="chat-container">
         <div class="chat-header">
-            <h1>MagicAI Code Assistant</h1>
-            <p class="subtitle">Ask me anything about coding!</p>
+            <h1>MagicAI Trading Assistant</h1>
+            <p class="subtitle">Professional Technical Analysis & Market Insights</p>
+        </div>
+        <div class="market-status">
+            <div id="marketInfo" class="market-info">
+                <div class="market-grid">
+                    <div class="market-item">
+                        <span class="label">Market Status</span>
+                        <span class="value" id="marketStatus">Loading...</span>
+                    </div>
+                    <div class="market-item">
+                        <span class="label">Trading Volume</span>
+                        <span class="value" id="marketVolume">-</span>
+                    </div>
+                    <div class="market-item">
+                        <span class="label">Market Trend</span>
+                        <span class="value" id="marketTrend">-</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-container">
             <textarea 
                 id="prompt" 
-                placeholder="Type your coding question here... (Press Enter to send)"
+                placeholder="Ask about trading patterns, market analysis, or specific stocks... (Press Enter to send)"
                 rows="3"></textarea>
             <button id="askButton" onclick="askMagicAI()">
-                <span>Send</span>
+                <span>Analyze</span>
             </button>
         </div>
     </div>

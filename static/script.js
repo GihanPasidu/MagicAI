@@ -13,7 +13,7 @@ async function askMagicAI() {
 
     // Disable button and show loading
     askButton.disabled = true;
-    const loadingMessage = addMessage('Thinking...', 'bot loading');
+    const loadingMessage = addMessage('Analyzing...', 'bot loading');
 
     try {
         const response = await fetch('/generate', {
@@ -28,8 +28,8 @@ async function askMagicAI() {
             throw new Error(data.error);
         }
 
-        // Replace loading message with response
-        loadingMessage.textContent = data.response;
+        // Replace loading message with formatted response
+        loadingMessage.innerHTML = formatResponse(data.response);
         loadingMessage.classList.remove('loading');
     } catch (error) {
         loadingMessage.textContent = `Error: ${error.message}`;
@@ -39,6 +39,14 @@ async function askMagicAI() {
         document.getElementById("prompt").value = "";
         scrollToBottom();
     }
+}
+
+function formatResponse(text) {
+    // Convert markdown-style code blocks
+    text = text.replace(/```(\w+)?\n([\s\S]+?)\n```/g, '<pre><code>$2</code></pre>');
+    // Convert line breaks
+    text = text.replace(/\n/g, '<br>');
+    return text;
 }
 
 function addMessage(text, type) {

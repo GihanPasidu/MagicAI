@@ -1,6 +1,6 @@
-# MagicAI
+# MagicAI Trading Assistant
 
-MagicAI is a coding assistant that helps you with your coding questions using AI. It leverages the power of the DialoGPT model to generate responses based on your input.
+MagicAI Trading Assistant is an AI-powered tool that helps traders analyze markets, understand trading patterns, and make informed decisions. It combines natural language processing with technical analysis capabilities.
 
 ## Installation
 
@@ -27,8 +27,16 @@ MagicAI is a coding assistant that helps you with your coding questions using AI
 
 ## Features
 
-- Ask coding questions and get AI-generated responses.
-- Simple and intuitive user interface.
+- Real-time stock analysis
+- Technical indicators calculation (RSI, SMA, etc.)
+- Market trend analysis
+- Natural language processing for trading queries
+
+## Usage Examples
+
+1. Analyze a stock: Type "$AAPL" to get analysis for Apple Inc.
+2. Ask about patterns: "What is a bullish flag pattern?"
+3. Get market insights: "How do I interpret RSI?"
 
 ## Technologies Used
 

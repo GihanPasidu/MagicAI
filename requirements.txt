@@ -1,8 +1,8 @@
-flask==2.0.1
-flask-cors==3.0.10
-transformers==4.30.2
-torch==2.0.1
-numpy==1.24.3
-sentencepiece>=0.1.96
-nltk==3.6.7
-openai==0.27.0
+flask>=3.1.0
+flask-cors>=5.0.1
+numpy>=2.2.4
+pandas>=2.2.3
+yfinance>=0.2.55
+python-dotenv>=1.1.0
+requests>=2.32.3
+
